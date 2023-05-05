@@ -77,7 +77,10 @@ pub fn upgrade(username: String) {
             .arg("version")
             .output()
         {
-            Ok(out) => out.stdout,
+            Ok(out) => match String::from_utf8(out.stdout) {
+                Ok(st) => st,
+                Err(err) => panic!("Unknown UTF-8 error: {}", err),
+            },
             Err(err) => panic!("Could not get the version of the latest binary: {}", err),
         };
         let current_version = match Command::new("sh")
@@ -86,7 +89,10 @@ pub fn upgrade(username: String) {
             .arg("version")
             .output()
         {
-            Ok(out) => out.stdout,
+            Ok(out) => match String::from_utf8(out.stdout) {
+                Ok(st) => st,
+                Err(err) => panic!("Unknown UTF-8 error: {}", err),
+            },
             Err(err) => panic!("Could not get the version of the current binary: {}", err),
         };
         if latest_version != current_version {
