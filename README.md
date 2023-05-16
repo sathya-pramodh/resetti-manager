@@ -27,3 +27,5 @@ chmod +x resetti-manager
     # or
     ./resetti-manager --upgrade
     ```
+# Thanks
+- Woofdoggo for creating the [macro](https://github.com/woofdoggo/resetti).
