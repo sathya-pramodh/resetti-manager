@@ -3,7 +3,6 @@ A binary manager for resetti.
 
 # Installation
 - Download the binary from the latest release.
-- Export it into a file that has executable permissions for your user. If you don't know what that means, export it to your `Downloads` folder.
 - Set the executable flag on the binary by performing this command in a terminal in the directory where you downloaded it. Here we take the example of `Downloads`.
 ```bash
 cd ~/Downloads
