@@ -28,7 +28,6 @@ fn main() {
         Some((_, username)) => username,
         None => panic!("No logged in user found!"),
     };
-    println!("Found logged in user {}.", username);
 
     // Checking if ~/.cache/resetti-manager exists.
     let cache_dir = format!("/home/{}/.cache/resetti-manager", username);

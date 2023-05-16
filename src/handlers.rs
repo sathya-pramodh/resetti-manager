@@ -35,19 +35,15 @@ pub fn update(username: String) {
     // Download the binary from the latest release.
     match Command::new("sh")
         .arg("-c")
-        .arg(format!("wget {}", url))
+        .arg(format!(
+            "wget -O {} {}",
+            format!("{}/resetti", bin_path.as_str()).as_str(),
+            url
+        ))
         .output()
     {
         Ok(_) => (),
         Err(err) => panic!("Unable to download from url: {}", err),
-    }
-    match Command::new("sh")
-        .arg("-c")
-        .arg(format!("mv resetti {}", bin_path.as_str()))
-        .output()
-    {
-        Ok(_) => (),
-        Err(err) => panic!("Unable to move binary: {}", err),
     }
 
     // Change executable permissions on the newly downloaded binary.
@@ -59,6 +55,7 @@ pub fn update(username: String) {
         Ok(_) => (),
         Err(err) => panic!("Unable to change permissions on file: {}", err),
     };
+    println!("Updated indices in '~/.cache/resetti-manager/'.")
 }
 
 // upgrade: Updates the indexes and installs them.
@@ -98,9 +95,13 @@ pub fn upgrade(username: String) {
         if latest_version != current_version {
             // Install the binary to `/usr/bin`.
             install(updated_bin);
+            println!("Installed resetti to '/usr/bin'.")
+        } else {
+            println!("Nothing to do. Exiting..")
         }
     } else {
         // Install the binary to `/usr/bin`.
         install(updated_bin);
+        println!("Installed resetti to '/usr/bin'.")
     }
 }
